@@ -14,6 +14,7 @@ class Product
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
+     
     private $id;
 
     /**
@@ -30,6 +31,17 @@ class Product
      * @ORM\Column(type="text")
      */
     private $description;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="products")
+     */
+    private $Category;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Brand", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $brand;
 
     public function getId(): ?int
     {
@@ -68,6 +80,30 @@ class Product
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->Category;
+    }
+
+    public function setCategory(?Category $Category): self
+    {
+        $this->Category = $Category;
+
+        return $this;
+    }
+
+    public function getBrand(): ?Brand
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(Brand $brand): self
+    {
+        $this->brand = $brand;
 
         return $this;
     }
