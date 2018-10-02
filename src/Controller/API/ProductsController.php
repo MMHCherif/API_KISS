@@ -1,8 +1,9 @@
 <?php
+namespace App\Controller\API;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use OS\RestBundle\Controller\FOSRestController;
 use App\Entity\Product;
-class ArticleController extends FOSRestController
+class ProductsController extends FOSRestController
 {
 	 /**
      * Creates an Product resource
@@ -12,11 +13,11 @@ class ArticleController extends FOSRestController
      */
     public function postArticle(Request $request): View
     {
-        $product = new Product();
-        $product->set($request->get('title'));
+       /* $product = new Product();
+        $product->set($request->get('active'));
         $article->setContent($request->get('content'));
         $this->articleRepository->save($article);
         // In case our POST was a success we need to return a 201 HTTP CREATED response
-        return View::create($article, Response::HTTP_CREATED);
+        return View::create($article, Response::HTTP_CREATED);*/
     }
 }

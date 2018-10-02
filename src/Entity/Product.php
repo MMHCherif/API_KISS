@@ -43,6 +43,11 @@ class Product
      */
     private $brand;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +109,22 @@ class Product
     public function setBrand(Brand $brand): self
     {
         $this->brand = $brand;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }
