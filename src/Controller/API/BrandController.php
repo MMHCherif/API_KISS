@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use JMS\Serializer;
-use App\Repository\ProductRepository;
+use App\Repository\BrandRepository;
 class BrandController extends FOSRestController 
 {
 	 /**
@@ -18,14 +18,14 @@ class BrandController extends FOSRestController
      * @param Request $request
      * @return View
      */
-    public function postProduct(Request $request): View
+    public function postBrand(Request $request): View
     {
-       	$ = new Brand();
+       	$brand = new Brand();
         $Brand->setName($request->get('name'));
         $Brand->setId(md5($request->get('id')));
         $em = $this->getDoctrine()->getManager();
         $em	->add($Brand);
-           	->flush();
+           $em->flush();
         $this->serialize($Brand,'JSON')  ; 
         return View::create($Brand, Response::HTTP_OK);
     }

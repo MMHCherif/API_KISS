@@ -20,12 +20,12 @@ class CategoryController extends FOSRestController
      */
     public function postProduct(Request $request): View
     {
-       	$ = new Category();
+       	$Category = new Category();
         $Category->setName($request->get('name'));
         $Category->setId(md5($request->get('id')));
         $em = $this->getDoctrine()->getManager();
         $em	->add($Category);
-           	->flush();
+           	$em->flush();
         $this->serialize($Category,'JSON')  ; 
         return View::create($Category, Response::HTTP_OK);
     }

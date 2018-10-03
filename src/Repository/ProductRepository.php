@@ -23,7 +23,7 @@ class ProductRepository extends ServiceEntityRepository
 //     * @return Product[] Returns an array of Product objects
 //     */
     
-    public function find($value)
+    public function find($value,$lockMode = null, $lockVersion = null)
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.id = :val')
