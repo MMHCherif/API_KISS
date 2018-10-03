@@ -4,4 +4,4 @@ web_controller:
 API_controller:
     resource: ../../src/Controller/API/
     type: annotation
-    #prefix: /api
+    prefix: /api
