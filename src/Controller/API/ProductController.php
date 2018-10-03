@@ -60,13 +60,13 @@ class ProductController extends FOSRestController
        
         return View::create($product, Response::HTTP_OK);
     }
-    /*/**
+    /**
      * Delete an Product resource
      * @Rest\Delete("/product/{id}")
      * @param IdProduct
      * @return View
      */
-    /*public function DeleteProduct($id): View
+    public function DeleteProduct($id): View
     {
     	if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) 
     	{
@@ -83,7 +83,7 @@ class ProductController extends FOSRestController
      * @param Request $request
      * @return View
      */
-    /*public function PutProduct(request $request): View
+    public function PutProduct(request $request): View
     {
     	$product=$this->deserialize($request->getData());
     		
@@ -94,5 +94,5 @@ class ProductController extends FOSRestController
     	$res=serialize($product);
     	return View::create($res, Response::HTTP_OK);
     }
-*/
+
 }
