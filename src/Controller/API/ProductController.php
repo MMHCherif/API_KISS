@@ -15,6 +15,7 @@ use App\Entity\Brand;
 use App\Entity\Category;
 class ProductController extends FOSRestController 
 {
+	
 	 /**
      * Creates an Product resource
      * @Rest\Post("/product/")
@@ -22,27 +23,31 @@ class ProductController extends FOSRestController
      */
    	public function postProduct(Request $request): View
     {
-       	$product= new Product();
+       	$product= new Product;
        // $id=$request->get('id');
        // $product->setId($id);
-        $product=json_decode(file_get_contents($request->files->get('test')));
+        $products=json_decode(file_get_contents($request->files->get('test')));
        // $name=$request->get('content');
-        var_dump($product);die();
-        $product->setName('test');
-        $brand=new Brand();
-        $brand=$request->get('brand');
-        $product->setBrand($brand);
+        
+        //$product=$products[0];
+        Product::cast($product,$products[0]);
+        
+        /*$brand=new Brand();
+        $brand=$product->brand;
+        
+        $product1->setBrand($brand);
+        
         $category=new Category();
         $category=$request->get('category');
         $product->setCategory($category);
         //$product->setValide($request->get('valide'));
         $description=$request->get('description');
-        $product->setDescription($description);
+        $product->setDescription($description);*/
         $em = $this->getDoctrine()->getManager();
         $em	->persist($product);
         $em->flush();
         
-        if (empty($request->get('id')))
+        if (empty($product->getId('id')))
         	return  View::create("NULL VALUES ARE NOT ALLOWED", Response::HTTP_NOT_ACCEPTABLE); 
         return View::create('ok', Response::HTTP_OK);
     }

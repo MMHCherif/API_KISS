@@ -17,17 +17,17 @@ class Category
      * @ORM\Column(type="integer")
      */
      
-    private $id;
+    public $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    public $name;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="Category")
      */
-    private $products;
+    public $products;
 
     public function __construct()
     {

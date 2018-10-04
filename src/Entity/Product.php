@@ -33,9 +33,9 @@ class Product
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="products")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category",cascade={"persist", "remove"}, inversedBy="products",)
      */
-    private $Category;
+    private $category;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Brand", cascade={"persist", "remove"})
@@ -127,6 +127,33 @@ class Product
         $this->name = $name;
 
         return $this;
+    }
+    
+        /**
+     * Translates type
+     * @param $destination Object destination
+     * @param stdClass $source Source
+     */
+    public static function Cast(&$destination, $source)
+    {
+        $sourceReflection = new \ReflectionObject($source);
+        $sourceProperties = $sourceReflection->getProperties();
+        foreach ($sourceProperties as $sourceProperty) 
+        {
+            $name = $sourceProperty->getName();
+
+            if (is_object($source->{$name})) 
+            {
+                $class='\\App\\Entity\\'.ucfirst($name);
+                $destination->{$name}=new $class();
+                self::Cast($destination->{$name}, $source->{$name});
+                
+            } 
+            else 
+            {
+                $destination->{$name} = $source->$name;
+            }
+        }
     }
     
 }
